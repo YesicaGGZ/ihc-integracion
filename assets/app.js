@@ -2,7 +2,7 @@
 
 
 // === Config ===
-const API_BASE = "http://127.0.0.1:5000/api"; // Ajusta según tu backend
+const API_BASE = "http://98.88.113.82:5000/api"; // Ajusta según tu backend
 
 // Catálogo local
 const CATALOGO = {
