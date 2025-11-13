@@ -1,0 +1,277 @@
+/* ===== VARIABLES Y CONFIGURACIÓN GENERAL ===== */
+:root {
+  --primary-blue: #6366f1;
+  --primary-purple: #8b5cf6;
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --secondary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --dark-gradient: linear-gradient(135deg, #475569 0%, #334155 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== ESTILOS GENERALES ===== */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-attachment: fixed;
+}
+
+/* ===== TÍTULO PRINCIPAL ===== */
+.display-5 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(3, 4, 71, 0.313);
+  position: relative;
+}
+
+.display-5::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+}
+
+/* ===== BOTONES DE CONTROL PRINCIPALES ===== */
+.btn-control {
+  width: 130px;
+  height: 100px;
+  border-radius: 20px;
+  font-weight: 700;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-control::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn-control:hover::before { left: 100%; }
+
+.btn-control:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn-control:active {
+  transform: translateY(-2px) scale(0.98);
+  transition: all 0.1s ease;
+}
+
+/* Colores específicos para botones */
+.btn-control[data-mov="1"],
+.btn-control[data-mov="2"],
+.btn-control[data-mov="8"],
+.btn-control[data-mov="9"] { background: var(--success-gradient); }
+
+.btn-control[data-mov="4"],
+.btn-control[data-mov="6"],
+.btn-control[data-mov="10"] { background: var(--secondary-gradient); }
+
+.btn-control[data-mov="5"],
+.btn-control[data-mov="7"],
+.btn-control[data-mov="11"] { background: var(--warning-gradient); }
+
+/* Efecto de pulso en hover */
+.btn-control:hover .bi { animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ===== BOTÓN STOP MEJORADO ===== */
+.stop-btn {
+  width: 120px;
+  height: 90px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 20px;
+  background: var(--danger-gradient);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.stop-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stop-btn:hover::before { opacity: 1; }
+
+.stop-btn:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(239, 68, 68, 0.3);
+}
+
+.stop-btn:active { transform: translateY(-2px) scale(0.98); }
+
+.stop-square {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stop-btn:hover .stop-square {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== TARJETAS ===== */
+.control-card, .status-card, .monitor-card {
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s ease;
+}
+
+/* ===== TARJETA DE ESTATUS ===== */
+.status-card .card-header {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#status {
+  background: linear-gradient(135deg, #023122, #031737);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.5s ease;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== BOTÓN MONITOREO ===== */
+#toggle-monitor-btn {
+  border-radius: 16px;
+  padding: 14px 28px;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  color: rgb(252, 213, 187);
+  border: none;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+#toggle-monitor-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ===== PANEL DE MONITOREO ===== */
+.monitor-card {
+  animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== BOTÓN DE VOZ (INTEGRADO) ===== */
+#toggle-voz-btn {
+  border-radius: 16px;
+  padding: 14px 28px;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  box-shadow: var(--shadow-soft);
+  background: var(--primary-gradient);
+  border: none;
+  color: rgb(187, 252, 188);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+#toggle-voz-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+#toggle-voz-btn:active { transform: translateY(-2px); }
+
+/* Estado activo de grabación */
+#toggle-voz-btn.recording {
+  background: var(--danger-gradient);
+  color: #fff;
+  animation: micPulse 1.5s infinite;
+}
+
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+  50% { box-shadow: 0 0 25px 10px rgba(239,68,68,0.2); }
+}
+
+/* ===== EFECTOS ESPECIALES ===== */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.en-espera {
+  animation: gentlePulse 3s ease-in-out infinite;
+  color: #9ca3af !important;
+  font-style: italic;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .btn-control { width: 100px; height: 80px; font-size: 0.9em; }
+  .stop-btn { width: 90px; height: 70px; }
+  .stop-square { width: 30px; height: 30px; }
+}
+
+@media (max-width: 576px) {
+  .display-5 { font-size: 2rem; }
+  .btn-control { width: 85px; height: 75px; }
+}
